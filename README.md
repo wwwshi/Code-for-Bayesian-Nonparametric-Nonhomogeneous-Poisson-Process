@@ -10,4 +10,4 @@ This repository contains code for [Bayesian Nonparametric Nonhomogeneous Poisson
 
 `function.R` contains helper functions for initialization and updating.
 
-`main_realdata.R` contains functions for our Collapsed Gibbs sampler algorithm and Dahl's method for summarizing MCMC samples, the code to fit training data set and MAE comparison based on testing data set.
+`main_realdata.R` contains functions for our Collapsed Gibbs sampler algorithm and Dahl's method for summarizing MCMC samples, the code to fit training data set and MAE comparison based on test data set.
