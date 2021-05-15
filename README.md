@@ -6,3 +6,8 @@ This repository contains code for [Bayesian Nonparametric Nonhomogeneous Poisson
 
 `data_test.Rdata` contains test data set for earthquake real data.
 
+`PP_Rcpp_update_z.cpp` contains Rcpp functions for calculating VN and updating cluster assignment z.
+
+`function.R` contains helper functions for initialization and updating.
+
+`main_realdata.R` contains functions for our Collapsed Gibbs sampler algorithm and Dahl's method for summarizing MCMC samples, the code to fit training data set and MAE comparison based on testing data set.
