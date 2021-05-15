@@ -1,24 +1,18 @@
 rm(list = ls(all = TRUE))
 library(Rcpp)
 library(spatstat)
-#setwd("~/Dropbox/GAM_Point Process/earthquake_data/revision 2")
 
-sourceCpp("PP_Rcpp_update_z_3.cpp")
-source("function2.R")
+sourceCpp("PP_Rcpp_update_z.cpp")
+source("function.R")
 
 # load earthquake data
 load("data_train.Rdata")
-#load("new_data7292.Rdata")
 data_train <- as.vector(quakecounts$counts)
 n.grid <- length(data_train)
-#n <- sqrt(n.grid)
 
 #function for Collapsed Gibbs Sampler
 NPPMFM <- function(data, ini.K, hyper, n.MCMC.iter, n.grid){
   # Initialize z
-  #d <- dist(data1, method = "euclidean")
-  #hc <- hclust(d, method = "complete")
-  #ini.z <- cutree(hc, k = ini.K)
   ini.z <- c(sample(1:ini.K, size = ini.K, replace = FALSE),
              sample(1:ini.K, size = n.grid - ini.K, replace = TRUE))
   
@@ -78,10 +72,6 @@ GetDahl <- function(MFMfit, n.burn.in)
       Dahl.index <- i
     }
   }
-  #membership.matrix <- lapply(1:n.iter, function(i) outer(z[i,], z[i,], "=="))
-  #membership.avg <- Reduce("+", membership.matrix) / n.iter
-  #sq.error <- sapply(membership.matrix, function(x, avg) sum((x - avg)^2), avg = membership.avg)
-  #Dahl.index <- which.min(sq.error)
   iter.index <- n.burn.in + Dahl.index
   Dahl.res <- list(z = MFMfit$z[iter.index,], K = MFMfit$K[iter.index], 
                    N.k = MFMfit$N.k[[iter.index]], lambda = MFMfit$lambda[[iter.index]])
